@@ -10,8 +10,8 @@ public class teste_funcoes {
 
     public static void main(String[] args) {
         try (Scanner entrada = new Scanner(System.in)) {
-            ArrayList<Double> array1 = new ArrayList<>();
-            ArrayList<Double> array2 = new ArrayList<>();
+            ArrayList< Double> array1 = new ArrayList<>();
+            ArrayList< Double> array2 = new ArrayList<>();
             boolean end = false;
             System.out.println("Insira numeros para o primeiro array, para parar digite 0");
             while (end == false) {
@@ -46,25 +46,35 @@ public class teste_funcoes {
                     entrada.nextLine();
                 }
             }
+            end = false;
             System.out.println("Digite um dos numeros abaixos para realizar as operações:\n0: Realiza a soma dos totais de cada array\n1: Realiza a soma entre os elementos das duas arrays e retorna uma nova array");
-            int ultEntrada = entrada.nextInt();
-            if (ultEntrada == 0) {
-                entrada.nextLine();
-                System.out.println("A soma dos totais é: " + somaTotal(array1, array2));
-            } else if (ultEntrada == 1) {
-                entrada.nextLine();
-                System.out.println("A soma dos elementos é: " + somaElementos(array1, array2));
+            while (end == false) {
+                try {
+                    int ultEntrada = entrada.nextInt();
+                    if (ultEntrada == 0) {
+                        entrada.nextLine();
+                        System.out.println("A soma dos totais é: " + somaTotal(array1, array2));
+                        end = true;
+                    } else if (ultEntrada == 1) {
+                        entrada.nextLine();
+                        System.out.println("A soma dos elementos é: " + somaElementos(array1, array2));
+                        end = true;
+                    }
+                } catch (InputMismatchException e) {
+                    System.out.println("Numero inválido, tente novamente");
+                    entrada.nextLine();
+                }
             }
         }
 
     }
 
-    static double somaTotal(ArrayList<Double> i, ArrayList<Double> j) {
+    static double somaTotal(ArrayList< Double> i, ArrayList< Double> j) {
         double sm = i.stream().mapToDouble(Double::doubleValue).sum() + j.stream().mapToDouble(Double::doubleValue).sum();
         return sm;
     }
 
-    static ArrayList<Double> somaElementos(ArrayList<Double> x, ArrayList<Double> y) {
+    static ArrayList< Double> somaElementos(ArrayList< Double> x, ArrayList< Double> y) {
         ArrayList< Double> arraio = new ArrayList<>();
         if (x.size() > y.size()) {
             while (x.size() != y.size()) {
